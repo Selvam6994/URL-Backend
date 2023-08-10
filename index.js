@@ -24,6 +24,7 @@ app.use(express.static("public"));
 app.use(express.json());
 app.use(CROS());
 
+
 //bcrypt password
 export async function generateHashedPassword(password) {
   const NO_OF_ROUNDS = 10;
