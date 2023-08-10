@@ -15,7 +15,7 @@ dotenv.config();
 
 export const app = express();
 
-const PORT = 4000;
+const PORT = process.env.PORT;
 const MongoURL = process.env.MONGO_URL;
 export const client = new MongoClient(MongoURL);
 await client.connect();
