@@ -8,15 +8,18 @@ import { convertUrl } from "./convertUrl.js";
 import { getUrlData } from "./getUrlData.js";
 import { cilckCounts } from "./cilckCounts.js";
 import * as dotenv from "dotenv";
+import { forgotPasswordOtp } from "./forgotPasswordOtp.js";
+import { otpVerification } from "./otpVerification.js";
+import { resetPassword } from "./resetPassword.js";
 dotenv.config();
 
 export const app = express();
 
 const PORT = 4000;
-const MongoURL = "mongodb://localhost:27017";
+const MongoURL = process.env.MONGO_URL;
 export const client = new MongoClient(MongoURL);
 await client.connect();
-export let secretKey = "secretkey";
+export let secretKey = process.env.SECRET_KEY;
 app.use(express.static("public"));
 app.use(express.json());
 app.use(CROS());
@@ -39,4 +42,10 @@ convertUrl();
 getUrlData();
 
 cilckCounts();
+
+forgotPasswordOtp();
+
+otpVerification();
+
+resetPassword();
 app.listen(PORT, () => console.log(`The server started in: ${PORT} ✨✨`));

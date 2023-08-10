@@ -1,4 +1,4 @@
-import { request, response } from "express";
+
 import { app, client, generateHashedPassword } from "./index.js";
 import nodeMailer from "nodemailer";
 import * as dotenv from "dotenv";
@@ -6,7 +6,7 @@ dotenv.config();
 
 export function signUpUser() {
   app.post("/signUp", async function (request, response) {
-    const { email, password, confirmPassword } = await request.body;
+    const { email } = await request.body;
     const oldUserData = await client
       .db("URL_Shortner")
       .collection("User Data")
@@ -29,7 +29,7 @@ export function signUpUser() {
         service: "gmail",
         auth: {
           user: "selvamyoor@gmail.com",
-          pass: "cqolhnuxhduwtztr",
+          pass: process.env.EMAIL_PASSWORD,
         },
       });
 
